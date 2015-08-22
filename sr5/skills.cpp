@@ -431,3 +431,132 @@ QString skills::getSkillDescription(QString skill)
 
 }
 
+QString skills::getSkillBoni(QString skill)
+{
+    if(skill.contains("Aufspüren"))
+    {
+        return "+2 auf DV bei Icon Aufspüren \n";
+    }
+
+    if(skill.contains("Ausnutzen"))
+    {
+        return "+2 auf S bei Eiligem Hacking \n";
+    }
+
+    if(skill.contains("Babymonitor"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+
+    if(skill.contains("Biofeedback"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    //17
+    if(skill.contains("Biofeedback-Filter"))
+    {
+        return "+2 Widerstand gegen Biofeedback \n";
+    }
+    if(skill.contains("Blackout"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Entschlüsseln"))
+    {
+        return "+1 Angriff \n";
+    }
+    if(skill.contains("Fessel"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Gabel"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Hammer"))
+    {
+        return "+2 Würfel Matrixschaden \n";;
+    }
+    if(skill.contains("Irreführung"))
+    {
+        return "+2 Würfel gegen Icon Aufspüren \n";
+    }
+    if(skill.contains("Panzerung"))
+    {
+        return "+2 Würfel für Matrixwiderstand \n";
+    }
+    if(skill.contains("Schild"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Schutzschirm"))
+    {
+        return "+1 Würfel gegen Matrixschaden & Biofeedback \n";
+    }
+    if(skill.contains("Splitterschutz"))
+    {
+        return "+4 Würfel gegen Datenbombenschaden \n";
+    }
+    if(skill.contains("Superbombe"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Tarnkappe"))
+    {
+        return "+1 auf Schleicher \n";
+    }
+    if(skill.contains("Überfall"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Konfigurator"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Schmöker"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Signalreiniger"))
+    {
+        return "+2 Rauschunterdrückung \n";
+    }
+    if(skill.contains("Toolbox"))
+    {
+        return "+1 auf Datenverarbeitung \n";
+    }
+    if(skill.contains("Verschlüssel"))
+    {
+        return "+1 auf Firewall \n";
+    }
+    if(skill.contains("Virtuelle Maschine"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+
+    if(skill.contains("Editieren"))
+    {
+        return "+2 Würfel auf alle Editierenproben \n";
+    }
+
+    if(skill.contains("Verwandlung"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Crash"))
+    {
+        return "+2 Würfel auf DV bei Programm Neustarten \n";
+    }
+
+    if(skill.contains("Evaluate"))
+    {
+        return "Siehe Beschreibung \n";
+    }
+    if(skill.contains("Mona Lisa"))
+    {
+        return "+2 Würfel bei Matrixsuche \n";
+    }
+    return "Siehe Beschreibung \n";
+}
+
+

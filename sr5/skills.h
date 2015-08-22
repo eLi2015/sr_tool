@@ -14,6 +14,7 @@ public:
 
 
     QString getSkillDescription(QString skill);
+    QString getSkillBoni(QString skill);
 
 
 private:

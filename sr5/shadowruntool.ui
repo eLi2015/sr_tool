@@ -14,19 +14,6 @@
    <string>ShadowrunTool</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLineEdit" name="output">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>990</x>
-      <y>600</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QTabWidget" name="tabs">
     <property name="geometry">
      <rect>

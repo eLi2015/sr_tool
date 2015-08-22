@@ -110,7 +110,7 @@ private:
     QString getASkilldescrb(QString arg1);
 
     void checkStatusLabel();
-    QString getSkillBoni(QString skill);
+    //QString getSkillBoni(QString skill);
     void setDescriptionText(QString descrip);
 
 
