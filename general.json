@@ -1,0 +1,77 @@
+{
+    "Bodenfahrzeuge - AR": {
+        "value": "10"
+    },
+    "Bodenfahzeuge": {
+        "value": "5"
+    },
+    "Computer": {
+        "value": "13"
+    },
+    "Cyberdecks": {
+        "value": "15"
+    },
+    "Elektronische Kriegsführung": {
+        "value": "12"
+    },
+    "Erste Hilfe": {
+        "value": "10"
+    },
+    "Fälschen": {
+        "value": "11"
+    },
+    "Führung": {
+        "value": "7"
+    },
+    "Gebräuche": {
+        "value": "7"
+    },
+    "Gewehre": {
+        "value": "6"
+    },
+    "Gewehre - AR": {
+        "value": "10"
+    },
+    "Hacking": {
+        "value": "15"
+    },
+    "Hacking - Hosts": {
+        "value": "17"
+    },
+    "Hardware": {
+        "value": "13"
+    },
+    "Laufen": {
+        "value": "6"
+    },
+    "Matrixkampf": {
+        "value": "13"
+    },
+    "Mechanik Gruppe": {
+        "value": "11"
+    },
+    "Pistolen": {
+        "value": "6"
+    },
+    "Schleichen": {
+        "value": "5"
+    },
+    "Schlosser": {
+        "value": "7"
+    },
+    "Software": {
+        "value": "13"
+    },
+    "Verhandeln": {
+        "value": "7"
+    },
+    "Waffenbau": {
+        "value": "8"
+    },
+    "Waffenlos": {
+        "value": "6"
+    },
+    "Wahrnehmung": {
+        "value": "5"
+    }
+}
