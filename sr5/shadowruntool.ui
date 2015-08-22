@@ -40,7 +40,7 @@
      <enum>QTabWidget::West</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -476,7 +476,7 @@
       <x>590</x>
       <y>380</y>
       <width>341</width>
-      <height>261</height>
+      <height>271</height>
      </rect>
     </property>
     <property name="title">
@@ -488,7 +488,7 @@
        <x>10</x>
        <y>20</y>
        <width>321</width>
-       <height>231</height>
+       <height>248</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -501,13 +501,6 @@
         </property>
         <property name="text">
          <string>INI-Wert:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="ini_roll">
-        <property name="text">
-         <string>INI-Roll</string>
         </property>
        </widget>
       </item>
@@ -526,17 +519,10 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QRadioButton" name="hotsim">
+      <item row="0" column="1">
+       <widget class="QPushButton" name="ini_roll">
         <property name="text">
-         <string>Heißes Sim</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QCheckBox" name="additionalIniDie">
-        <property name="text">
-         <string>+1w6</string>
+         <string>INI-Roll</string>
         </property>
        </widget>
       </item>
@@ -547,10 +533,17 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QPushButton" name="endRound">
+      <item row="1" column="2">
+       <widget class="QCheckBox" name="additionalIniDie">
         <property name="text">
-         <string>Runde fertig</string>
+         <string>+1w6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QRadioButton" name="hotsim">
+        <property name="text">
+         <string>Heißes Sim</string>
         </property>
        </widget>
       </item>
@@ -558,6 +551,13 @@
        <widget class="QRadioButton" name="arsim">
         <property name="text">
          <string>AR</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="endRound">
+        <property name="text">
+         <string>Runde fertig</string>
         </property>
        </widget>
       </item>
@@ -769,6 +769,31 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QProgressBar" name="IniBar">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>600</y>
+      <width>201</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="value">
+     <number>21</number>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="format">
+     <string>Restliche Ini: %p</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

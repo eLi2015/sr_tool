@@ -98,7 +98,7 @@ int ShadowrunTool::randValue(int high, int low)
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 6);
     return dis(gen);
-    //return qrand() % ((high + 1)-low)+low;
+
 }
 int ShadowrunTool::randValue()
 {
@@ -107,42 +107,15 @@ int ShadowrunTool::randValue()
 
 void ShadowrunTool::on_diceroll_clicked()
 {
-    //QTime time = QTime::currentTime();
 
-    //this->ui->output->setText(QString::number(qrand()));
     QList<int> rolledValues;
 
     int diceCount = this->ui->dicecount->value();
 
-//    QFile tmpOutput("result.txt");
-//    if(tmpOutput.open(QIODevice::WriteOnly | QIODevice::Text))
-//    {
-
-//    }
-//    else
-//    {
-//        qDebug() << "möööööp kann ich nicht öffnen";
-//    }
-    //QTextStream out(&tmpOutput);
-
-
-    //for(int j = 0; j < 1000; j++) {
-
-        for(int i = 0; i < diceCount; i++) {
-            //        time = QTime::currentTime();
-            //        qsrand((uint) time.msec());
-            //rolledValues.append(randValue(6, 1));
-
-            rolledValues.append(randValue());
-
-            //out << rolledValues.last() << ", ";
-
-            //QTest::qSleep(1);
-        }
-      //  out << "; \n";
-      //  tmpOutput.flush();
-    //}
-    //tmpOutput.close();
+    for(int i = 0; i < diceCount; i++)
+    {
+        rolledValues.append(randValue());
+    }
 
     //1:  2:  3:  4:  5:  6:
     int counter[6] = {0};
@@ -179,21 +152,7 @@ void ShadowrunTool::on_diceroll_clicked()
             +"\n 5: "+QString::number(counter[4])
             +"\n 6: "+QString::number(counter[5]));
     this->ui->rolledDice->setText(output);
-//    this->ui->output->setText(
-//                "1: "+QString::number(counter[0])
-//            +" 2: "+QString::number(counter[1])
-//            +" 3: "+QString::number(counter[2])
-//            +" 4: "+QString::number(counter[3])
-//            +" 5: "+QString::number(counter[4])
-//            +" 6: "+QString::number(counter[5]));
 
-    //    int sum = 0;
-    //    for(int i = 0; i < rolledValues.size(); i++) {
-    //        sum += rolledValues[i];
-    //    }
-    //    sum /= rolledValues.size();
-    //    this->ui->output->setText(QString::number(sum));
-    //janskdn
     // set statistics
     if(counter[0] > rolledValues.size()/2)
     {
@@ -253,7 +212,6 @@ void ShadowrunTool::on_uiSkillTable_clicked(const QModelIndex &index)
 void ShadowrunTool::on_uiSkillTable_2_clicked(const QModelIndex &index)
 {
     int value = mSkillList_2->item(index.row(), 0)->text().toInt();
-    //this->ui->output->setText(QString::number(value));
     this->ui->dicecount->setValue(value);
 
     QTableWidgetItem *header = mSkillList_2->verticalHeaderItem(index.row());
@@ -264,7 +222,7 @@ void ShadowrunTool::on_uiSkillTable_2_clicked(const QModelIndex &index)
 void ShadowrunTool::on_uiSkillTable_3_clicked(const QModelIndex &index)
 {
     int value = mSkillList_3->item(index.row(), 0)->text().toInt();
-    //this->ui->output->setText(QString::number(value));
+
     this->ui->dicecount->setValue(value);
 
     QTableWidgetItem *header = mSkillList_3->verticalHeaderItem(index.row());
@@ -276,7 +234,7 @@ void ShadowrunTool::on_uiSkillTable_3_clicked(const QModelIndex &index)
 void ShadowrunTool::on_uiSkillTable_4_clicked(const QModelIndex &index)
 {
     int value = mSkillList_4->item(index.row(), 0)->text().toInt();
-    //this->ui->output->setText(QString::number(value));
+
     this->ui->dicecount->setValue(value);
 
     QTableWidgetItem *header = mSkillList_4->verticalHeaderItem(index.row());
@@ -286,7 +244,7 @@ void ShadowrunTool::on_uiSkillTable_4_clicked(const QModelIndex &index)
 void ShadowrunTool::on_uiSkillTable_5_clicked(const QModelIndex &index)
 {
     int value = mSkillList_5->item(index.row(), 0)->text().toInt();
-    //this->ui->output->setText(QString::number(value));
+
     this->ui->dicecount->setValue(value);
 
     QTableWidgetItem *header = mSkillList_5->verticalHeaderItem(index.row());
@@ -384,6 +342,7 @@ void ShadowrunTool::on_ini_roll_clicked()
     //QTime time = QTime::currentTime();
     int rolledValues = initiative;
     int diceCount = 0;
+
     if(this->ui->coldsim->isChecked()) {
         diceCount = 3;
         if(this->ui->additionalIniDie->isChecked())
@@ -410,8 +369,10 @@ void ShadowrunTool::on_ini_roll_clicked()
         rolledValues+=(randValue(6, 1));
         //QTest::qSleep(1);
     }
-    this->ui->iniValue->setText(QString::number(rolledValues));
+    this->ui->IniBar->setMaximum(100);
 
+    this->ui->iniValue->setText(QString::number(rolledValues));
+    this->ui->IniBar->setValue(rolledValues);
 }
 
 void ShadowrunTool::on_endRound_clicked()
@@ -424,8 +385,10 @@ void ShadowrunTool::on_endRound_clicked()
         aktValue -= 10;
     }
     if(aktValue < 0) {
+        this->ui->IniBar->setValue((0*100)/this->ui->IniBar->maximum());
         this->ui->iniValue->setText(QString::number(0));
     } else {
+        this->ui->IniBar->setValue((aktValue*100)/this->ui->IniBar->maximum());
         this->ui->iniValue->setText(QString::number(aktValue));
     }
 }
