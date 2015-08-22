@@ -18,7 +18,7 @@ public:
     reader();
     ~reader();
 
-    QMap<QString, QString> readJson(QString filename);
+    QMultiMap<QString, QString> readJson(QString filename);
 
     void saveTableToJson(QTableWidget *table, QString filename);
 

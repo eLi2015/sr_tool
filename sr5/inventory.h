@@ -2,7 +2,8 @@
 #define INVENTORY_H
 
 #include <QWidget>
-#include "QListWidgetItem"
+#include <QListWidgetItem>
+#include <QMultiMap>
 
 namespace Ui {
 class Inventory;
@@ -18,16 +19,21 @@ public:
 
     QList<QString> getInventory();
 
+    void setItems(QMultiMap<QString, QString> map);
+
 private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
 
 
+    void on_home_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::Inventory *ui;
     QList<QString> currItems;
+    QMultiMap<QString, QString> itemMap;
+    QStringList itemKeyList;
 };
 
 #endif // INVENTORY_H

@@ -10,7 +10,7 @@ reader::~reader()
 
 }
 
-QMap<QString, QString> reader::readJson(QString filename)
+QMultiMap<QString, QString> reader::readJson(QString filename)
 {
 
     QString val;
@@ -25,7 +25,7 @@ QMap<QString, QString> reader::readJson(QString filename)
     QJsonObject jObject = d.object();
     QStringList keyList = jObject.keys();
     //qDebug() << keyList;
-    QMap<QString, QString> toReturn;
+    QMultiMap<QString, QString> toReturn;
     foreach(QString key, keyList)
     {
         QJsonObject subObject = jObject.value(key).toObject();

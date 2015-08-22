@@ -2,11 +2,13 @@
 #include "ui_inventory.h"
 #include "qdebug.h"
 
+
 Inventory::Inventory(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Inventory)
 {
     ui->setupUi(this);
+
 
 }
 Inventory::~Inventory()
@@ -17,6 +19,19 @@ Inventory::~Inventory()
 QList<QString> Inventory::getInventory()
 {
     return this->currItems;
+}
+
+void Inventory::setItems(QMultiMap<QString, QString> map)
+{
+    this->itemMap = map;
+    this->itemKeyList = map.keys();
+    QStringList keyList = map.keys();
+    keyList.removeDuplicates();
+    //qDebug() << keyList;
+    foreach(QString item, keyList)
+    {
+        this->ui->home->addItem(item);
+    }
 }
 
 void Inventory::on_pushButton_clicked()
@@ -42,4 +57,17 @@ void Inventory::on_pushButton_2_clicked()
 
         delete item;
     }
+}
+
+
+void Inventory::on_home_itemClicked(QListWidgetItem *item)
+{
+    QStringList infos = this->itemMap.values(item->text());
+    QString itemLabelText;
+    foreach(QString item, infos)
+    {
+        itemLabelText.append(item).append(" ");
+    }
+
+    this->ui->itemInfo->setText(itemLabelText);
 }

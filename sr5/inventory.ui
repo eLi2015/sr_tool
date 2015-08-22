@@ -38,81 +38,6 @@
      <height>192</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>Sony CIY</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Black Scorpion</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Troublemaker</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Cavalier Arms Crockett</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Datenwanzen</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>RFID Chips</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>RFID Löscher</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Mag Schlossknacker St.5</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Zielger. Störsender St 3</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Bereichstörsender St. 3/4</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Wanzenscanner St 3</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Dietrich</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Gefütterter Mantel</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Panzerweste</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Ganzkörper. Panzerung</string>
-    </property>
-   </item>
   </widget>
   <widget class="QListWidget" name="inventory">
    <property name="geometry">
@@ -171,6 +96,19 @@
    </property>
    <property name="text">
     <string>Inventar</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="itemInfo">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>240</y>
+     <width>451</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

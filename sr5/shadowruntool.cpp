@@ -66,15 +66,19 @@ ShadowrunTool::ShadowrunTool(QWidget *parent) :
     this->ui->prog_four->addItems(hackingProgs);
 
     zweitesWidget = new QWidget();
-    this->inventar = new Inventory(zweitesWidget);
+    this->m_inventar.setParent(zweitesWidget);
 
     connect(ui->actionInventar, SIGNAL(triggered(bool)), this, SLOT(openInventory()));
 
-    fileReader.saveJsonToTable(this->ui->uiSkillTable, "../general.json");
-    fileReader.saveJsonToTable(this->ui->uiSkillTable_2, "../attack.json");
-    fileReader.saveJsonToTable(this->ui->uiSkillTable_3, "../datenverarb.json");
-    fileReader.saveJsonToTable(this->ui->uiSkillTable_4, "../schleicher.json");
-    fileReader.saveJsonToTable(this->ui->uiSkillTable_5, "../firewall.json");
+    m_fileReader.saveJsonToTable(this->ui->uiSkillTable, "../general.json");
+    m_fileReader.saveJsonToTable(this->ui->uiSkillTable_2, "../attack.json");
+    m_fileReader.saveJsonToTable(this->ui->uiSkillTable_3, "../datenverarb.json");
+    m_fileReader.saveJsonToTable(this->ui->uiSkillTable_4, "../schleicher.json");
+    m_fileReader.saveJsonToTable(this->ui->uiSkillTable_5, "../firewall.json");
+
+    inventoryItems = m_fileReader.readJson("../inventory.json");
+
+    this->m_inventar.setItems(inventoryItems);
 
 }
 
@@ -86,16 +90,16 @@ ShadowrunTool::~ShadowrunTool()
 
 void ShadowrunTool::on_closing()
 {
-    fileReader.saveTableToJson(this->ui->uiSkillTable, "../general.json");
-    fileReader.saveTableToJson(this->ui->uiSkillTable_2, "../attack.json");
-    fileReader.saveTableToJson(this->ui->uiSkillTable_3, "../datenverarb.json");
-    fileReader.saveTableToJson(this->ui->uiSkillTable_4, "../schleicher.json");
-    fileReader.saveTableToJson(this->ui->uiSkillTable_5, "../firewall.json");
+    m_fileReader.saveTableToJson(this->ui->uiSkillTable, "../general.json");
+    m_fileReader.saveTableToJson(this->ui->uiSkillTable_2, "../attack.json");
+    m_fileReader.saveTableToJson(this->ui->uiSkillTable_3, "../datenverarb.json");
+    m_fileReader.saveTableToJson(this->ui->uiSkillTable_4, "../schleicher.json");
+    m_fileReader.saveTableToJson(this->ui->uiSkillTable_5, "../firewall.json");
 }
 
 int ShadowrunTool::randValue(int high, int low)
 {
-    std::mt19937 gen(rd());
+    std::mt19937 gen(m_rand());
     std::uniform_int_distribution<> dis(1, 6);
     return dis(gen);
 
@@ -309,28 +313,28 @@ void ShadowrunTool::on_prog_one_currentIndexChanged(const QString &arg1)
     this->ui->skilldescription_lab->setText(QString(arg1).append(":\n").append(this->getASkilldescrb(arg1)));
 
 
-    this->modifikations[2] = QString("Programm 1: ").append(this->descriptionFactory.getSkillBoni(arg1));
+    this->modifikations[2] = QString("Programm 1: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
     this->checkStatusLabel();
 }
 
 void ShadowrunTool::on_prog_two_currentIndexChanged(const QString &arg1)
 {
     this->ui->skilldescription_lab->setText(QString(arg1).append(":\n").append(this->getASkilldescrb(arg1)));
-    this->modifikations[3] = QString("Programm 2: ").append(this->descriptionFactory.getSkillBoni(arg1));
+    this->modifikations[3] = QString("Programm 2: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
     this->checkStatusLabel();
 }
 
 void ShadowrunTool::on_prog_three_currentIndexChanged(const QString &arg1)
 {
     this->ui->skilldescription_lab->setText(QString(arg1).append(":\n").append(this->getASkilldescrb(arg1)));
-    this->modifikations[4] = QString("Programm 3: ").append(this->descriptionFactory.getSkillBoni(arg1));
+    this->modifikations[4] = QString("Programm 3: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
     this->checkStatusLabel();
 }
 
 void ShadowrunTool::on_prog_four_currentIndexChanged(const QString &arg1)
 {
     this->ui->skilldescription_lab->setText(QString(arg1).append(":\n").append(this->getASkilldescrb(arg1)));
-    this->modifikations[5] = QString("Programm 4: ").append(this->descriptionFactory.getSkillBoni(arg1));
+    this->modifikations[5] = QString("Programm 4: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
     this->checkStatusLabel();
 }
 
@@ -396,7 +400,7 @@ void ShadowrunTool::on_endRound_clicked()
 
 QString ShadowrunTool::getASkilldescrb(QString arg1)
 {
-    return this->programmsFactory.getProgrammDescription(arg1);
+    return this->m_programmsFactory.getProgrammDescription(arg1);
 }
 
 void ShadowrunTool::on_progDescribBox_one_clicked()
@@ -423,7 +427,7 @@ void ShadowrunTool::on_progDescribBox_four_clicked()
 void ShadowrunTool::on_currInventory_clicked(const QModelIndex &index)
 {
     (void) index;
-    QList<QString> currItems = this->inventar->getInventory();
+    QList<QString> currItems = this->m_inventar.getInventory();
     this->ui->currInventory->clear();
 
     foreach(QString item, currItems)
@@ -507,5 +511,19 @@ void ShadowrunTool::checkStatusLabel()
 
 void ShadowrunTool::setDescriptionText(QString descrip)
 {
-    this->ui->skilldescription_lab->setText(this->descriptionFactory.getSkillDescription(descrip));
+    this->ui->skilldescription_lab->setText(this->m_descriptionFactory.getSkillDescription(descrip));
+}
+
+void ShadowrunTool::on_currInventory_itemClicked(QListWidgetItem *item)
+{
+    QStringList infos = this->inventoryItems.values(item->text());
+    QString itemLabelText;
+    foreach(QString item, infos)
+    {
+        itemLabelText.append(item).append(" ");
+    }
+
+    this->ui->statusBar->showMessage(itemLabelText);
+
+  //this->ui->statusBar->showMessage(item->text());
 }

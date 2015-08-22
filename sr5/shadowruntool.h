@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
-#include <QMap>
+
 
 #include "inventory.h"
 #include "skills.h"
@@ -91,14 +91,13 @@ private slots:
 
     void on_comboBox_currentIndexChanged(const QString &arg1);
 
-
+    void on_currInventory_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::ShadowrunTool *ui;
-    Inventory *inventar;
     QWidget *zweitesWidget;
     QStringList modifikations;
-
+    QMultiMap<QString, QString> inventoryItems;
     QTableWidget *mSkillList;
     QTableWidget *mSkillList_2;
     QTableWidget *mSkillList_3;
@@ -110,14 +109,15 @@ private:
     QString getASkilldescrb(QString arg1);
 
     void checkStatusLabel();
-    //QString getSkillBoni(QString skill);
+
     void setDescriptionText(QString descrip);
 
 
-    std::random_device rd;
-    skills descriptionFactory;
-    programms programmsFactory;
-    reader fileReader;
+    Inventory m_inventar;
+    std::random_device m_rand;
+    skills m_descriptionFactory;
+    programms m_programmsFactory;
+    reader m_fileReader;
 
 
 
