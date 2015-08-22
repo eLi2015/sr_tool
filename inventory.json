@@ -1,0 +1,72 @@
+{
+    "Sony CIY 720": {
+        "Stufe": "Stufe 4",
+        "Attribute": "Attribute 7 6 5 4",
+        "Programme": "Programme 4",
+        "Verfügbarkeit": "Verfügbarkeit 12E"
+
+    },
+    "Cavalier Arms Crocket EBR": {
+        "Präzision": "Präzision 7",
+        "Schaden": "Schaden 12K",
+        "DK": "DK -3",
+        "Modus": "Modus HM/SM",
+        "RK": "RK (1)",
+        "Munition": "Munition 20(s)"
+    },
+    "Ceska Black Scorpion": {
+        "Prazision": "Prazision 5",
+        "Schaden": "Schaden 6K",
+        "DK": "DK -",
+        "Modus": "Modus HM/SM",
+        "RK": "RK (1)",
+        "Munition": "Munition 35(s)"
+    },
+    "Troublemaker": {
+        "Prazision": "Prazision 5",
+        "Schaden": "Schaden 6K",
+        "DK": "DK -",
+        "Modus": "Modus HM/SM",
+        "RK": "RK (1)",
+        "Munition": "Munition 35(s)"
+    },
+    "Datenwanzen": {
+        "Stufe" : "Stufe 5"
+    },
+    "RFID-Chips": {
+        "Stufe" : "Stufe 5"
+    },
+    "RFID-Löscher": {
+        "Stufe" : "Stufe 5"
+    },
+    "Gefütterter Mantel": {
+        "Panzerung" : "Panzerung 9"
+    },
+    "Vollbody Unterwäsche": {
+        "Panzerung" : "Panzerung 3"
+    },
+    "Panzerweste": {
+        "Panzerung" : "9"
+    },
+    "Ganzkörper Panzerung": {
+        "Panzerung" : "Panzerung 15"
+    },
+    "Magschlossknacker": {
+        "Stufe" : "Stufe 5"
+    },
+    "Zielgerichteter Störsender": {
+        "Stufe" : "Stufe 3"
+    },
+    "Bereichsstörsender": {
+        "Stufe" : "Stufe 3"
+    },
+    "Bereichsstörsender": {
+        "Stufe" : "Stufe 4"
+    },
+    "Wanzenscanner": {
+        "Stufe" : "Stufe 3"
+    },
+    "Dietrich": {
+        "Stufe" : "Stufe 3"
+    }
+}
