@@ -1,0 +1,15 @@
+[010]: Back-End:
+	[011]: random function von GUI separieren
+	[012]: Attribut Unterstützung
+	[013]: Limit grenze anzeigen
+	[014]: Deck-Konfigurationen speichern (siehe [025])
+	[015]: Beschreibungen debuggen + fehlende ergänzen
+
+[020]: Front-End:
+	[021]: Beschreibungen aus der GUI entfernen und in Extra Fenster
+	[022]: Zeichen bereich einfügen (Linien zeichnen, speichern, verwerfen)
+	[023]: Programm auswahl in seperates Fenster auslagern (nicht mehr Combobox) sondern (QLineWidgets)
+	[024]: Connection Liste
+	[025]: Deck Konfigurationen als seperates Fenster mit direkter Auswahl (QLineWidgets)
+			(keine Combobox oder radiobuttons) 
+	[026]: gui resizeable
