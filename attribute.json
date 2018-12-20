@@ -1,0 +1,56 @@
+{
+    "Konstitution": {
+        "value": "2"
+    },
+    "Geschicklichkeit": {
+        "value": "3"
+    },
+    "Reaktion": {
+        "value": "2"
+    },
+    "Stärke": {
+        "value": "2"
+    },
+    "Willenskraft": {
+        "value": "4"
+    },
+    "Logik": {
+        "value": "6/9"
+    },
+    "Intuition": {
+        "value": "4"
+    },
+    "Charisma": {
+        "value": "3"
+    },
+    "Essenz": {
+        "value": "4,9"
+    },
+    "Edge": {
+        "value": "2/3"
+    },
+    "Korperlich": {
+        "value": "3"
+    },
+    "Geistig": {
+        "value": "8"
+    },
+    "Sozial": {
+        "value": "6"
+    },
+    "Beherrschung": {
+        "value": "7"
+    },
+    "Errinnerung": {
+        "value": "13/15"
+    },
+    "Menschenkenntnis": {
+        "value": "7"
+    },
+    "Heben": {
+        "value": "5"
+    },
+    "Bewegen": {
+        "value": "2"
+    }
+}
