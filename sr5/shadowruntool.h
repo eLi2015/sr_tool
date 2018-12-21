@@ -93,11 +93,20 @@ private slots:
 
     void on_currInventory_itemClicked(QListWidgetItem *item);
 
+    void on_progDescribBox_five_clicked();
+
+    void on_progDescribBox_six_clicked();
+
+    void on_prog_five_currentIndexChanged(const QString &arg1);
+
+    void on_prog_six_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::ShadowrunTool *ui;
     QWidget *zweitesWidget;
     QStringList modifikations;
     QMultiMap<QString, QString> inventoryItems;
+    QMultiMap<QString, QString> attribute;
     QTableWidget *mSkillList;
     QTableWidget *mSkillList_2;
     QTableWidget *mSkillList_3;
@@ -112,6 +121,7 @@ private:
 
     void setDescriptionText(QString descrip);
 
+    void setAttributes(QMultiMap<QString, QString> attributes);
 
     Inventory m_inventar;
     std::random_device m_rand;

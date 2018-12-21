@@ -20,12 +20,14 @@ ShadowrunTool::ShadowrunTool(QWidget *parent) :
     mSkillList_4 = this->ui->uiSkillTable_4;
     mSkillList_5 = this->ui->uiSkillTable_5;
 
-    this->modifikations.append("Modifikationen: \n");
+    this->modifikations.append("");
     this->modifikations.append("Würfel \n");
     this->modifikations.append("Programm 1 \n");
     this->modifikations.append("Programm 2 \n");
     this->modifikations.append("Programm 3 \n");
     this->modifikations.append("Programm 4 \n");
+    this->modifikations.append("Programm 5 \n");
+    this->modifikations.append("Programm 6 \n");
 
     QStringList hackingProgs;
 
@@ -64,12 +66,14 @@ ShadowrunTool::ShadowrunTool(QWidget *parent) :
     this->ui->prog_two->addItems(hackingProgs);
     this->ui->prog_three->addItems(hackingProgs);
     this->ui->prog_four->addItems(hackingProgs);
+    this->ui->prog_five->addItems(hackingProgs);
+    this->ui->prog_six->addItems(hackingProgs);
 
     zweitesWidget = new QWidget();
     this->m_inventar.setParent(zweitesWidget);
 
     connect(ui->actionInventar, SIGNAL(triggered(bool)), this, SLOT(openInventory()));
-
+    //@ToDo: QDir search "Value" Ordner den Tabs des Tables den Filename geben
     m_fileReader.saveJsonToTable(this->ui->uiSkillTable, "../general.json");
     m_fileReader.saveJsonToTable(this->ui->uiSkillTable_2, "../attack.json");
     m_fileReader.saveJsonToTable(this->ui->uiSkillTable_3, "../datenverarb.json");
@@ -80,6 +84,9 @@ ShadowrunTool::ShadowrunTool(QWidget *parent) :
 
     this->m_inventar.setItems(inventoryItems);
 
+    this->attribute = m_fileReader.readJson("../attribute.json");
+
+    this->setAttributes(this->attribute);
 }
 
 ShadowrunTool::~ShadowrunTool()
@@ -90,6 +97,7 @@ ShadowrunTool::~ShadowrunTool()
 
 void ShadowrunTool::on_closing()
 {
+    //@ToDo: save to file with tab name
     m_fileReader.saveTableToJson(this->ui->uiSkillTable, "../general.json");
     m_fileReader.saveTableToJson(this->ui->uiSkillTable_2, "../attack.json");
     m_fileReader.saveTableToJson(this->ui->uiSkillTable_3, "../datenverarb.json");
@@ -310,7 +318,9 @@ void ShadowrunTool::on_arsim_clicked()
 
 void ShadowrunTool::on_prog_one_currentIndexChanged(const QString &arg1)
 {
-    this->ui->skilldescription_lab->setText(QString(arg1).append(":\n").append(this->getASkilldescrb(arg1)));
+    QString descriptionText = QString(arg1).append(":\n").append(this->getASkilldescrb(arg1));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
 
 
     this->modifikations[2] = QString("Programm 1: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
@@ -319,21 +329,30 @@ void ShadowrunTool::on_prog_one_currentIndexChanged(const QString &arg1)
 
 void ShadowrunTool::on_prog_two_currentIndexChanged(const QString &arg1)
 {
-    this->ui->skilldescription_lab->setText(QString(arg1).append(":\n").append(this->getASkilldescrb(arg1)));
+    QString descriptionText = QString(arg1).append(":\n").append(this->getASkilldescrb(arg1));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
+
     this->modifikations[3] = QString("Programm 2: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
     this->checkStatusLabel();
 }
 
 void ShadowrunTool::on_prog_three_currentIndexChanged(const QString &arg1)
 {
-    this->ui->skilldescription_lab->setText(QString(arg1).append(":\n").append(this->getASkilldescrb(arg1)));
+    QString descriptionText = QString(arg1).append(":\n").append(this->getASkilldescrb(arg1));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
+
     this->modifikations[4] = QString("Programm 3: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
     this->checkStatusLabel();
 }
 
 void ShadowrunTool::on_prog_four_currentIndexChanged(const QString &arg1)
 {
-    this->ui->skilldescription_lab->setText(QString(arg1).append(":\n").append(this->getASkilldescrb(arg1)));
+    QString descriptionText = QString(arg1).append(":\n").append(this->getASkilldescrb(arg1));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
+
     this->modifikations[5] = QString("Programm 4: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
     this->checkStatusLabel();
 }
@@ -405,23 +424,32 @@ QString ShadowrunTool::getASkilldescrb(QString arg1)
 
 void ShadowrunTool::on_progDescribBox_one_clicked()
 {
-    this->ui->skilldescription_lab->setText(QString(this->ui->prog_one->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_one->currentText())));
+    QString descriptionText = QString(this->ui->prog_one->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_one->currentText()));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
+
     this->checkStatusLabel();
 }
 
 void ShadowrunTool::on_progDescribBox_two_clicked()
 {
-    this->ui->skilldescription_lab->setText(QString(this->ui->prog_two->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_two->currentText())));
+    QString descriptionText = QString(this->ui->prog_two->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_two->currentText()));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
 }
 
 void ShadowrunTool::on_progDescribBox_three_clicked()
 {
-    this->ui->skilldescription_lab->setText(QString(this->ui->prog_three->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_three->currentText())));
+    QString descriptionText = QString(this->ui->prog_three->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_three->currentText()));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
 }
 
 void ShadowrunTool::on_progDescribBox_four_clicked()
 {
-    this->ui->skilldescription_lab->setText(QString(this->ui->prog_four->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_four->currentText())));
+    QString descriptionText = QString(this->ui->prog_four->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_four->currentText()));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
 }
 
 void ShadowrunTool::on_currInventory_clicked(const QModelIndex &index)
@@ -436,7 +464,7 @@ void ShadowrunTool::on_currInventory_clicked(const QModelIndex &index)
     }
 
     if(currItems.size() == 0)
-        this->ui->currInventory->addItem("Inventar");
+        this->ui->currInventory->addItem("");
 }
 
 void ShadowrunTool::openInventory()
@@ -446,44 +474,48 @@ void ShadowrunTool::openInventory()
 
 void ShadowrunTool::on_conf_std_clicked()
 {
-    this->ui->spinAttack->setValue(7);
-    this->ui->spinData->setValue(5);
-    this->ui->spinFirewall->setValue(4);
-    this->ui->spinSleep->setValue(7);
+    this->ui->spinAttack->setValue(6);
+    this->ui->spinSleep->setValue(8);
+    this->ui->spinData->setValue(7);
+    this->ui->spinFirewall->setValue(9);
 
-    this->ui->prog_one->setCurrentIndex(2);
-    this->ui->prog_two->setCurrentIndex(21);
-    this->ui->prog_three->setCurrentIndex(1);
+    this->ui->prog_one->setCurrentIndex(1);
+    this->ui->prog_two->setCurrentIndex(2);
+    this->ui->prog_three->setCurrentIndex(21);
     this->ui->prog_four->setCurrentIndex(28);
+    this->ui->prog_five->setCurrentIndex(17);
+    this->ui->prog_six->setCurrentIndex(24);
 }
 
 void ShadowrunTool::on_conf_schl_clicked()
 {
-    this->ui->spinAttack->setValue(4);
-    this->ui->spinData->setValue(6);
-    this->ui->spinFirewall->setValue(6);
-    this->ui->spinSleep->setValue(7);
+    this->ui->spinAttack->setValue(1);
+    this->ui->spinSleep->setValue(12);
+    this->ui->spinData->setValue(9);
+    this->ui->spinFirewall->setValue(9);
 
     this->ui->prog_one->setCurrentIndex(0);
-    this->ui->prog_two->setCurrentIndex(26);
-    this->ui->prog_three->setCurrentIndex(9);
+    this->ui->prog_two->setCurrentIndex(9);
+    this->ui->prog_three->setCurrentIndex(26);
     this->ui->prog_four->setCurrentIndex(17);
+    this->ui->prog_five->setCurrentIndex(14);
+    this->ui->prog_six->setCurrentIndex(24);
 }
 
 void ShadowrunTool::on_conf_dv_clicked()
 {
-    this->ui->spinAttack->setValue(4);
-    this->ui->spinData->setValue(9);
-    this->ui->spinFirewall->setValue(5);
-    this->ui->spinSleep->setValue(5);
+    this->ui->spinAttack->setValue(1);
+    this->ui->spinSleep->setValue(8);
+    this->ui->spinData->setValue(12);
+    this->ui->spinFirewall->setValue(9);
 }
 
 void ShadowrunTool::on_conf_var_clicked()
 {
-    this->ui->spinAttack->setValue(7);
-    this->ui->spinData->setValue(5);
-    this->ui->spinFirewall->setValue(4);
+    this->ui->spinAttack->setValue(5);
     this->ui->spinSleep->setValue(7);
+    this->ui->spinData->setValue(9);
+    this->ui->spinFirewall->setValue(9);
 }
 
 void ShadowrunTool::on_comboBox_currentIndexChanged(const QString &arg1)
@@ -498,20 +530,39 @@ void ShadowrunTool::on_comboBox_currentIndexChanged(const QString &arg1)
     }
 }
 
-void ShadowrunTool::checkStatusLabel()
-{
-    QString newText;
-    foreach(QString item, this->modifikations)
-    {
-        newText.append(item);
-    }
-    this->ui->status_sim->setText(newText);
-}
+
 
 
 void ShadowrunTool::setDescriptionText(QString descrip)
 {
-    this->ui->skilldescription_lab->setText(this->m_descriptionFactory.getSkillDescription(descrip));
+    QString descriptionText = this->m_descriptionFactory.getSkillDescription(descrip);
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
+}
+
+void ShadowrunTool::setAttributes(QMultiMap<QString, QString> attributes)
+{
+    this->ui->konsti->setText(QString("Konstitution: ").append(attributes.value("Konstitution")));
+    this->ui->geschick->setText(QString("Geschicklichkeit: ").append(attributes.value("Geschicklichkeit")));
+    this->ui->reaktion->setText(QString("Reaktion: ").append(attributes.value("Reaktion")));
+    this->ui->starke->setText(QString("Stärke: ").append(attributes.value("Stärke")));
+    this->ui->willenskraft->setText(QString("Willenskraft: ").append(attributes.value("Willenskraft")));
+    this->ui->logik->setText(QString("Logik: ").append(attributes.value("Logik")));
+    this->ui->intuition->setText(QString("Intuition: ").append(attributes.value("Intuition")));
+    this->ui->charisma->setText(QString("Charisma: ").append(attributes.value("Charisma")));
+    this->ui->essenz->setText(QString("Essenz: ").append(attributes.value("Essenz")));
+    this->ui->edge->setText(QString("Edge: ").append(attributes.value("Edge")));
+
+    this->ui->korperlich->setText(QString("Körperlich: ").append(attributes.value("Korperlich")));
+    this->ui->geistig->setText(QString("Geistig: ").append(attributes.value("Geistig")));
+    this->ui->sozial->setText(QString("Sozial: ").append(attributes.value("Sozial")));
+
+    this->ui->selbstbeherr->setText(QString("Selbstbeherrschung: ").append(attributes.value("Beherrschung")));
+    this->ui->errinnerung->setText(QString("Errinnerungsvermögen: ").append(attributes.value("Errinnerung")));
+    this->ui->menschenkenntnis->setText(QString("Menschenkenntnis: ").append(attributes.value("Menschenkenntnis")));
+    this->ui->heben->setText(QString("Heben/Tragen: ").append(attributes.value("Heben")));
+    this->ui->bewegung->setText(QString("Bewegen: ").append(attributes.value("Bewegen")));
+
 }
 
 void ShadowrunTool::on_currInventory_itemClicked(QListWidgetItem *item)
@@ -524,6 +575,50 @@ void ShadowrunTool::on_currInventory_itemClicked(QListWidgetItem *item)
     }
 
     this->ui->statusBar->showMessage(itemLabelText);
-
+    this->ui->currInventoryDesccrip->clear();
+    this->ui->currInventoryDesccrip->addItem(itemLabelText);
   //this->ui->statusBar->showMessage(item->text());
+}
+
+void ShadowrunTool::on_progDescribBox_five_clicked()
+{
+    QString descriptionText = QString(this->ui->prog_five->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_five->currentText()));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
+}
+
+void ShadowrunTool::on_progDescribBox_six_clicked()
+{
+    QString descriptionText = QString(this->ui->prog_six->currentText()).append(":\n").append(getASkilldescrb(this->ui->prog_six->currentText()));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
+}
+
+void ShadowrunTool::on_prog_five_currentIndexChanged(const QString &arg1)
+{
+    QString descriptionText = QString(arg1).append(":\n").append(this->getASkilldescrb(arg1));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
+
+    this->modifikations[6] = QString("Programm 5: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
+    this->checkStatusLabel();
+}
+
+void ShadowrunTool::on_prog_six_currentIndexChanged(const QString &arg1)
+{
+    QString descriptionText = QString(arg1).append(":\n").append(this->getASkilldescrb(arg1));
+    this->ui->skillDescriptionArea->clear();
+    this->ui->skillDescriptionArea->insertPlainText(descriptionText);
+
+    this->modifikations[7] = QString("Programm 6: ").append(this->m_descriptionFactory.getSkillBoni(arg1));
+    this->checkStatusLabel();
+}
+void ShadowrunTool::checkStatusLabel()
+{
+    QString newText;
+    foreach(QString item, this->modifikations)
+    {
+        newText.append(item);
+    }
+    this->ui->status_sim->setText(newText);
 }
